@@ -1,0 +1,1201 @@
+ <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+  
+<Script file="Looter.lua"/>
+<Script file="LooterMinimap.lua"/>
+  
+  <!-- Here the general scripts that have to be Executed -->
+	<Frame name="Looter_GeneralScripts" hidden="true">
+		<Scripts>     
+			<OnLoad> 
+				Looter_OnLoad(); 
+			</OnLoad>
+			<OnEvent>
+				Looter_OnEvent(event);
+			</OnEvent>
+		</Scripts>
+	</Frame> 
+
+  <!-- Looter Menu Template Frame -->
+  <Frame name="Looter" hidden="true" virtual="true" parent="UIParent"  moveable="true" enableMouse="true">
+  
+    <!-- Sets the size of the frame -->
+    <Size>
+      <AbsDimension x="460" y="450"/>
+    </Size>
+	
+    <!-- Sets where the frame sits -->
+    <Anchors>
+		<Anchor point="CENTER">
+			<Offset>
+				<AbsDimension x="0" y="0"/>
+			</Offset>
+		</Anchor>
+    </Anchors>
+	
+	<!-- Adding in a border -->
+	<Backdrop bgFile="Interface\DialogFrame\UI-Spellbook-SpellBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Gold-Border" tile="true">
+		<TileSize>
+			<AbsValue val="16"/>
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="16"/>
+		</EdgeSize>
+	</Backdrop >
+
+    <!-- set the parameters for the layers of the frame -->
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parent_Background" setAllPoints="true">
+          <Color r="0" g="0" b="0" a=".8" />
+        </Texture>
+      </Layer>
+    </Layers >
+	
+	<!-- Using escape to close the frame -->
+	<Scripts>
+		<OnLoad>
+			tinsert(UISpecialFrames,this:GetName());
+		</OnLoad>
+		<OnShow>
+			PlaySound("igCharacterInfoOpen");
+		</OnShow>
+		<OnHide>
+			PlaySound("igCharacterInfoClose");
+		</OnHide>
+	</Scripts>
+	
+  </Frame>
+  
+  <!-- Looter Main Menu Page -->   
+   <Frame  name="Looter1" hidden="true" inherits="Looter" moveable="true" enableMouse="true">
+	<!-- Open A -->
+	
+		<!-- The on panel text -->
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Looter Options">
+					<Color r="255" g="255" b="255" />
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="0" y="-20"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Input for User Selected List">
+					<Color r="255" g="255" b="255" />
+                        <Anchors>
+                            <Anchor point="CENTER" relativePoint="TOP">
+                                <Offset>
+                                        <AbsDimension x="-100" y="-365"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                </FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Delete loot option is use at your own risk!">
+					<Color r="0.65" g="0.04" b="0.08" />
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+									<AbsDimension x="40" y="-345"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Loot items this value or more">
+					<Color r="255" g="255" b="255" />
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="75" y="-120"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Junk">
+					<Color r="0.35" g="0.35" b="0.35" />
+					<!-- 91 91 91 (Grey) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="-110" y="-40"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Common">
+					<Color r="1" g="1" b="1" />
+					<!-- 255 255 255 (White) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="-60" y="-40"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Uncommon">
+					<Color r="0.03" g="0.72" b="0.06" />
+					<!-- 10 186 17 (Green) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="15" y="-40"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Rare">
+					<Color r="0" g="0.34" b="0.86" />
+					<!-- 0 88 220 (Blue) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="75" y="-40"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Epic">
+					<Color r="0.36" g="0" b="0.8" />
+					<!-- 93 0 204 (Purple) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="115" y="-40"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Legendary">
+					<Color r="0.88" g="0.50" b="0" />
+					<!-- 255 129 0 (Orange) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="175" y="-40"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="(select one or none)">
+					<Color r="1" g="1" b="0" />
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="0" y="-75"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Gold">
+					<Color r="1" g="0.71" b="0.035" />
+					<!-- 255 183 9 (Gold) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="-35" y="-145"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Silver">
+					<Color r="0.47" g="0.49" b="0.45" />
+					<!-- 121 125 117 (Silver) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="28" y="-145"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+								<FontString name="$parent_Text" inherits="GameFontNormal" text="Copper">
+					<Color r="0.50" g="0.28" b="0.13" />
+					<!-- 129 73 35 (Copper) -->
+						<Anchors>
+							<Anchor point="CENTER" relativePoint="TOP">
+								<Offset>
+										<AbsDimension x="88" y="-145"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+				</FontString>
+				<!--FontString name="$parent_Text" inherits="GameFontNormal" text="Welcome to Looter! Please let us know any |n features you would like or bugs you find.|n |n Select the categories you want to have looted. |n You can use the input box to add or remove your |n own items from the auto loot list. Make sure|n to save or it wont update. We are working on |n a scroll frame to display your current list but are |n having some trouble getting it working. Until then |n you can use the display button to see your list. " nonspacewrap="false" justifyH="Center">
+					<Color r="255" g="255" b="255" />
+                        <Anchors>
+                            <Anchor point="RIGHT" relativePoint="TOPRIGHT">
+                                <Offset>
+                                        <AbsDimension x="-10" y="-100"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                </FontString-->
+				<FontString name="$parent_Text" inherits="GameFontNormal" text="Categories">
+					<Color r="255" g="255" b="255" />
+                        <Anchors>
+                            <Anchor point="LEFT" relativePoint="TOPLEFT">
+                                <Offset>
+                                        <AbsDimension x="20" y="-35"/>
+                                </Offset>
+                            </Anchor>
+                        </Anchors>
+                </FontString>
+      </Layer>
+    </Layers>
+   
+		<!-- The meat of the panel -->
+		<Frames> 
+		<!-- Opoen B -->
+		
+		<!-- The buttons for the frame -->
+		<!-- The Add Button -->
+		<Button name="$parent_AddInput" inherits="UIPanelButtonTemplate" text="Add" id="1">
+	
+			<!-- Sets the size of the button -->
+			<Size> 
+				<AbsDimension x="50" y="24"/> 
+			</Size> 
+
+			<!-- Sets the position of the button -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-400"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		
+		<!-- Sets what the button does -->
+			<Scripts>
+				<OnClick>
+					Looter_Add(arg1)
+				</OnClick>
+			</Scripts>
+		
+		</Button>
+	
+		<!-- The Remove Button -->
+		<Button name="$parent_RemoveInput" inherits="UIPanelButtonTemplate" text="Remove" id="1">
+		
+			<!-- Sets the size of the button -->
+			<Size> 
+				<AbsDimension x="70" y="24"/> 
+			</Size>
+			
+			<!-- Sets the position of the button -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="75" y="-400"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+			<!-- Sets what the button does -->
+			<Scripts>
+				<OnClick>
+					Looter_Remove(arg1)
+				</OnClick>
+			</Scripts>
+		</Button>
+
+		<!-- The temporary button to display the user selected list until the scroll frame is working -->
+		<Button name="$parent_DisplayInput" inherits="UIPanelButtonTemplate" text="Display" id="13">
+		
+			<!-- Sets the size of the button -->
+			<Size> 
+				<AbsDimension x="70" y="24"/> 
+			</Size>
+			
+			<!-- Sets the position of the button -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="150" y="-400"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+			<!-- Sets what the button does -->
+			<Scripts>
+				<OnClick>
+					Looter_DisplayGUI()
+				</OnClick>
+			</Scripts>
+		</Button>
+		
+		<!-- The Close Button -->	
+		<Button name="$parent_Close" inherits="UIPanelCloseButton" id="2">
+		<!-- (it appears that this button doesnt need a script to run it will automaticaly hide the frame not sure why) -->
+		
+			<!-- Sets the position of the button. -->
+			<Anchors> 
+				<Anchor point="TOPRIGHT">
+					<Offset>
+						<AbsDimension x="-4" y="-4"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+			<Scripts>
+				<OnClick>
+				EMLFrame_Toggle("Looter1")
+				Looter_setCheckBoxes()
+				Looter_checkValue("set")
+				</OnClick>
+			</Scripts>
+		</Button>
+		
+		<!--  Sets the user selected input box -->
+		<EditBox name="$parent_InputBox" inherits="InputBoxTemplate" id="3" autofocus="false">
+		
+			<!-- Sets the size of the box-->
+			<Size> 
+				<AbsDimension x="200" y="26"/> 
+			</Size> 
+			
+			<!-- Sets the position of the box -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="22" y="-370"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+		</EditBox>
+
+		<EditBox name="$parent_GoldBox" inherits="InputBoxTemplate" id="20" autofocus="false">
+		
+			<!-- Sets the size of the box-->
+			<Size> 
+				<AbsDimension x="30" y="26"/> 
+			</Size> 
+			
+			<!-- Sets the position of the box -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="185" y="-150"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			
+		</EditBox>
+		
+		<EditBox name="$parent_SilverBox" inherits="InputBoxTemplate" id="21" autofocus="false">
+		
+			<!-- Sets the size of the box-->
+			<Size> 
+				<AbsDimension x="30" y="26"/> 
+			</Size> 
+			
+			<!-- Sets the position of the box -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="245" y="-150"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			
+		</EditBox>		
+		
+		<EditBox name="$parent_CopperBox" inherits="InputBoxTemplate" id="22" autofocus="false">
+		
+			<!-- Sets the size of the box-->
+			<Size> 
+				<AbsDimension x="30" y="26"/> 
+			</Size> 
+			
+			<!-- Sets the position of the box -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="305" y="-150"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			
+		</EditBox>
+		
+		<!-- Skinning -->
+		<CheckButton name="$parent_Skinning" inherits="UICheckButtonTemplate" id="4" text="Skinning">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-50"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Skinning");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Mining -->
+		<CheckButton name="$parent_Mining" inherits="UICheckButtonTemplate" id="5" text="Mining">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-70"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Mining");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Herbalism -->
+		<CheckButton name="$parent_Herbalism" inherits="UICheckButtonTemplate" id="6" text="Herbalism">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-90"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Herbalism");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Disenchanting	-->
+		<CheckButton name="$parent_Disenchanting" inherits="UICheckButtonTemplate" id="7" text="Disenchanting">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-110"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Disenchanting");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+	
+		<!-- Cloth -->
+		<CheckButton name="$parent_Cloth" inherits="UICheckButtonTemplate" id="8" text="Cloth">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-130"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Cloth");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Prospecting -->
+		<CheckButton name="$parent_Prospecting" inherits="UICheckButtonTemplate" id="9" text="Prospecting">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-150"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Prospecting/Gems");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+
+		<!-- Milling -->
+		<CheckButton name="$parent_Milling" inherits="UICheckButtonTemplate" id="40" text="Milling">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-170"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Milling");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Fishing-->
+		<CheckButton name="$parent_Fishing" inherits="UICheckButtonTemplate" id="10" text="Fishing">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-190"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Fishing");
+				</OnLoad>
+			</Scripts>
+		
+		</CheckButton>
+		
+		<!-- Health Potions-->
+		<CheckButton name="$parent_Health" inherits="UICheckButtonTemplate" id="11" text="Health">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-210"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Health Potions");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Mana Potions-->
+		<CheckButton name="$parent_Mana" inherits="UICheckButtonTemplate" id="12" text="Mana">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-230"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Mana Potions");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- User Selected-->
+		<CheckButton name="$parent_User" inherits="UICheckButtonTemplate" id="14" text="User">
+			
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-270"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 	
+			
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("User Selected");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+			
+		<!-- Battleground Loot -->
+		<CheckButton name="$parent_Battleground" inherits="UICheckButtonTemplate" id="17" text="Battleground">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-250"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Battleground");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Quest Loot -->
+		<CheckButton name="$parent_Quest" inherits="UICheckButtonTemplate" id="18" text="Quest">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-290"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Quest Items");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+
+		<!-- General Profession Loot -->
+		<CheckButton name="$parent_Misc" inherits="UICheckButtonTemplate" id="41" text="Misc">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="20" y="-310"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Misc Profession");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<!-- Turn Looter on or off -->
+		<CheckButton name="$parent_OnOff" inherits="UICheckButtonTemplate" id="19" text="OnOff">
+		
+		<!-- Sets the size of the checkbox -->
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		
+		<!-- Sets the position of the checkbox -->
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="170" y="-220"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		
+		<!-- Sets what the checkbox does -->
+		<Scripts>
+			<OnLoad>
+				getglobal(this:GetName().."Text"):SetText("Turn Looter On or Off (checked is on)");
+			</OnLoad>
+		</Scripts>
+		
+		</CheckButton>
+		
+		<!-- Mount after Gathering option -->
+		<CheckButton name="$parent_MountGather" inherits="UICheckButtonTemplate" id="55" text="MountGather">
+		
+		<!-- Sets the size of the checkbox -->
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		
+		<!-- Sets the position of the checkbox -->
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="135" y="-280"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		
+		<!-- Sets what the checkbox does -->
+		<Scripts>
+			<OnLoad>
+				getglobal(this:GetName().."Text"):SetText("Mount after Gathering (requires Useful Extras)");
+			</OnLoad>
+		</Scripts>
+		
+		</CheckButton>
+		
+		<!-- Mount after looting with key held -->
+		<CheckButton name="$parent_MountKey" inherits="UICheckButtonTemplate" id="56" text="MountKey">
+		
+		<!-- Sets the size of the checkbox -->
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		
+		<!-- Sets the position of the checkbox -->
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="135" y="-300"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		
+		<!-- Sets what the checkbox does -->
+		<Scripts>
+			<Onload>
+				getglobal(this:GetName().."Text"):SetText("Mount after looting with modifier down (requires UE)");
+			</Onload>
+		</Scripts>
+		
+		</CheckButton>
+		
+		<!-- Use the blocked items list -->
+		<CheckButton name="$parent_UseBlocked" inherits="UICheckButtonTemplate" id="57" text="UseBlocked">
+		
+		<!-- Sets the size of the checkbox -->
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		
+		<!-- Sets the position of the checkbox -->
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="135" y="-320"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		
+		<!-- Sets what the checkbox does -->
+		<Scripts>
+			<Onload>
+				getglobal(this:GetName().."Text"):SetText("Don't loot items on the blocked list");
+			</Onload>
+		</Scripts>
+		
+		</CheckButton>
+		
+		<!-- Close after looting -->
+		<CheckButton name="$parent_CloseLoot" inherits="UICheckButtonTemplate" id="57" text="CloseLoot">
+		
+		<!-- Sets the size of the checkbox -->
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		
+		<!-- Sets the position of the checkbox -->
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="135" y="-240"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		
+		<!-- Sets what the checkbox does -->
+		<Scripts>
+			<Onload>
+				getglobal(this:GetName().."Text"):SetText("Close the Loot window after selected looting");
+			</Onload>
+		</Scripts>
+		
+		</CheckButton>
+		
+		<!-- Deletes items not looted by the loot lists *Use at your own risk* -->
+		<CheckButton name="$parent_DeleteLoot" inherits="UICheckButtonTemplate" id="58" text="DeleteLoot">
+		
+		<!-- Sets the size of the checkbox -->
+		<Size>
+			<AbsDimension x="20" y="20"/>
+		</Size>
+		
+		<!-- Sets the position of the checkbox -->
+		<Anchors>
+			<Anchor point="TOPLEFT">
+				<Offset>
+					<AbsDimension x="135" y="-260"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		
+		<!-- Sets what the checkbox does -->
+		<Scripts>
+			<Onload>
+				getglobal(this:GetName().."Text"):SetText("Delete leftover items not looted by loot lists *NOTE*");
+			</Onload>
+		</Scripts>
+		
+		</CheckButton>
+				
+		<!-- The Save Button -->
+		<Button name="$parent_SaveInput" inherits="UIPanelButtonTemplate" text="Save" id="15">
+	
+			<!-- Sets the size of the button -->
+			<Size> 
+				<AbsDimension x="65" y="24"/> 
+			</Size> 
+
+			<!-- Sets the position of the button -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="320" y="-420"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		
+		<!-- Sets what the button does -->
+			<Scripts>
+				<OnClick>
+				Looter_checkCheckBoxes()
+				Looter_checkValue("check")
+				EMLFrame_Toggle("Looter1")
+				Looter_setCheckBoxes()
+				</OnClick>
+			</Scripts>
+		
+		</Button>
+			
+		<!-- The Cancel Button -->
+		<Button name="$parent_CancelInput" inherits="UIPanelButtonTemplate" text="Cancel" id="16">
+	
+			<!-- Sets the size of the button -->
+			<Size> 
+				<AbsDimension x="75" y="24"/> 
+			</Size> 
+
+			<!-- Sets the position of the button -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="240" y="-420"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		
+		<!-- Sets what the button does -->
+			<Scripts>
+				<OnClick>
+				EMLFrame_Toggle("Looter1")
+				Looter_setCheckBoxes()
+				Looter_checkValue("set")
+				</OnClick>
+			</Scripts>
+		
+		</Button>
+
+		<!-- Hide MiniMap Button -->
+		<CheckButton name="$parent_HideMMB" inherits="UICheckButtonTemplate" id="18" text="HideMMB">
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			<!-- Sets the position of the checkbox -->
+			<Anchors>
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="10" y="-425"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Show Minimap Button (checked is on)");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<CheckButton name="$parent_Value" inherits="UICheckButtonTemplate" id="25" text="Value">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-180"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Use value for item looting");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+
+		<CheckButton name="$parent_StackValue" inherits="UICheckButtonTemplate" id="26" text="StackValue">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-195"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+
+			<!-- Sets what the checkbox does -->
+			<Scripts>
+				<OnLoad>
+					getglobal(this:GetName().."Text"):SetText("Use stack value for item looting");
+				</OnLoad>
+			</Scripts>
+			
+		</CheckButton>
+		
+		<CheckButton name="$parent_Junk" inherits="UICheckButtonTemplate" id="55" text="Junk">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="110" y="-50"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+		</CheckButton>
+
+		<CheckButton name="$parent_Common" inherits="UICheckButtonTemplate" id="56" text="Common">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="160" y="-50"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+		</CheckButton>
+
+		<CheckButton name="$parent_Uncommon" inherits="UICheckButtonTemplate" id="57" text="Uncommon">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="230" y="-50"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+		</CheckButton>
+
+		<CheckButton name="$parent_Rare" inherits="UICheckButtonTemplate" id="58" text="Rare">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="295" y="-50"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+		</CheckButton>
+
+		<CheckButton name="$parent_Epic" inherits="UICheckButtonTemplate" id="59" text="Epic">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="335" y="-50"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+		</CheckButton>
+
+		<CheckButton name="$parent_Legendary" inherits="UICheckButtonTemplate" id="60" text="Legendary">
+		
+			<!-- Sets the size of the checkbox -->
+			<Size>
+				<AbsDimension x="20" y="20"/>
+			</Size>
+			
+			<!-- Sets the position of the checkbox -->
+			<Anchors> 
+				<Anchor point="TOPLEFT">
+					<Offset>
+						<AbsDimension x="395" y="-50"/>
+					</Offset>
+				</Anchor>
+			</Anchors> 
+			
+		</CheckButton>
+		
+		</Frames>
+			<!-- Close B -->
+
+			
+   </Frame>
+   <!-- Close A -->
+
+   <!-- Frame for the timer -->
+	<Frame name="Looter_Timer" hidden="true">
+		<Scripts>     
+			<OnLoad>
+				self.TimeSinceLastUpdate = 0
+			</OnLoad>
+			<OnUpdate>
+				Looter_waitTimer(self,elapsed,Looter_timerTask);
+			</OnUpdate>
+		</Scripts>
+	</Frame> 
+   
+</Ui>

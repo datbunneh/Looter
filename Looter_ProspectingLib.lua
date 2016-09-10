@@ -1,0 +1,51 @@
+-- Looters Prospecting/Gem Data
+
+LooterProspecting = {
+	-- Gems (Prospecting/Mining)
+	[774] = true, -- Malachite
+	[818] = true, -- Tigerseye
+	[1210] = true, -- Shadowgem
+	[1206] = true, -- Moss Agate
+	[1705] = true, -- Lesser Moonstone
+	[1529] = true, -- Jade
+	[3864] = true, -- Citrine
+	[7909] = true, -- Aquamarine
+	[7910] = true, -- Star Ruby
+	[12361] = true, -- Blue Sapphire
+	[12799] = true, -- Large Opal
+	[12364] = true, -- Huge emerald
+	[12800] = true, -- Azerothian diamond
+	[23079] = true, -- Deep Peridot
+	[21929] = true, -- Flame Spessarite
+	[23112] = true, -- Golden Draenite
+	[23107] = true, -- Shadow Draenite
+	[23117] = true, -- Azure Moonstone
+	[23077] = true, -- Blood Garnet
+	[23436] = true, -- Living Ruby
+	[23441] = true, -- Nightseye
+	[23440] = true, -- Dawnstone
+	[23437] = true, -- Talasite
+	[23439] = true, -- Noble Topaz
+	[23438] = true, -- Star of Elune
+	[24186] = true, -- Copper Powder
+	[24188] = true, -- Tin Powder
+	[24190] = true, -- Iron Powder
+	[24234] = true, -- Mithril Powder
+	[24235] = true, -- Thorium Powder
+	[24242] = true, -- Fel Iron Powder
+	[24243] = true, -- Adamantite Powder
+	[36932] = true, -- Dark Jade
+	[36929] = true, -- Huge Citrine
+	[36926] = true, -- Shadow Crystal
+	[36917] = true, -- Bloodstone
+	[36920] = true, -- Sun Crystal
+	[36923] = true, -- Chalcedony
+	[36930] = true, -- Monarch Topaz
+	[36927] = true, -- Twilight Opal
+	[36918] = true, -- Scarlet Ruby
+	[36921] = true, -- Autumn's Glow
+	[36933] = true, -- Forest Emerald
+	[36924] = true, -- Sky Sapphire
+	[42225] = true, -- Dragonseye
+	[46849] = true	-- Titanium Powder 
+}

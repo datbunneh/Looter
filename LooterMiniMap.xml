@@ -1,0 +1,85 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="LooterMinimap.lua"/>
+	<Script file="Looter.lua"/>
+
+		<Frame name="LooterMiniMap_GeneralScripts" hidden="true">
+			<Scripts>     
+				<OnLoad> 
+					LooterMiniMap_OnLoad(); 
+				</OnLoad>
+				<OnEvent>
+					LooterMiniMap_OnEvent();
+				</OnEvent>
+			</Scripts>
+		</Frame> 
+		
+		<Button name="Looter_MinimapButton" parent="Minimap" enableMouse="true" movable="true" hidden="false">
+		<Size>
+			<AbsDimension x="33" y="33"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="Looter_MinimapButton_Icon" file="Interface\Icons\INV_Misc_Bag_17">
+					<Size>
+						<AbsDimension x="21" y="21"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size>
+						<AbsDimension x="56" y="56"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="Looter_MinimapButton_DraggingFrame" hidden="true">
+				<Scripts>
+					<OnUpdate>
+						Looter_MinimapButton_DraggingFrame_OnUpdate()
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+		<Scripts>
+			<OnLoad>
+				this:RegisterForClicks("LeftButtonUp","RightButtonUp")
+				this:RegisterForDrag("LeftButton","RightButton")
+			</OnLoad>
+			<OnDragStart>
+				this:LockHighlight()
+				Looter_MinimapButton_DraggingFrame:Show()
+			</OnDragStart>
+			<OnDragStop>
+				this:UnlockHighlight()
+				Looter_MinimapButton_DraggingFrame:Hide()
+			</OnDragStop>
+			<OnClick>
+				Looter_MinimapButton_OnClick(button); 
+			</OnClick>
+			<OnEnter>
+				Looter_Minimap_Button_OnEnter();
+			</OnEnter>
+			<OnLeave>
+				Looter_Minimap_Button_OnLeave();
+			</OnLeave>
+		</Scripts>
+	</Button>
+
+</Ui>

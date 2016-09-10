@@ -1,0 +1,50 @@
+-- Looters Fish Data
+
+LooterFishs = {
+	-- Fishes (Fishing/Drops)
+	[6359] = true, -- Firefin Snapper
+	[6291] = true, -- Raw Brilliant Smallfish
+	[6303] = true, -- Raw Slitherskin Mackerel
+	[6317] = true, -- Raw Loch Frenzy
+	[6289] = true, -- Raw Longjaw Mud Snapper
+	[6361] = true, -- Raw Rainbow Fin Albacore
+	[21071] = true, -- Raw Sagefish
+	[6308] = true, -- Raw Bristle Whisker Catfish
+	[8365] = true, -- Raw Mithril Head Trout
+	[6362] = true, -- Raw Rockscale Cod
+	[21153] = true, -- Raw Greater Sagefish
+	[13754] = true, -- Raw Glossy Mightfish
+	[13759] = true, -- Raw Nightfin Snapper
+	[13758] = true, -- Raw Redgill
+	[4603] = true, -- Raw Spotted Yellowtail
+	[13756] = true, -- Raw Summer Bass
+	[13760] = true, -- Raw Sunscale Salmon
+	[13888] = true, -- Darkclaw Lobster
+	[8959] = true, -- Raw Spinefin Halibut
+	[13889] = true, -- Raw Whitescale Salmon
+	[27422] = true, -- Barbed Gill Trout
+	[27435] = true, -- Figluster's Mudfish
+	[27439] = true, -- Furious Crawdad
+	[27438] = true, -- Golden Darter
+	[27437] = true, -- Icefin Bluefish
+	[27425] = true, -- Spotted Feltail
+	[27429] = true, -- Zangarian Sporefish
+	[33823] = true, -- Bloodfin Catfish
+	[33824] = true, -- Crescent-Tail Skullfish
+	[35285] = true, -- Giant Sunfish
+	[41812] = true, -- Barrelhead Gody
+	[41808] = true, -- Bonescale Snapper
+	[41805] = true, -- Borean Man O' War
+	[41807] = true, -- Dragonfin Angelfish
+	[41810] = true, -- Fangtooth Herring
+	[41809] = true, -- Glacial Salmon
+	[41814] = true, -- Glassfin Minnow
+	[41802] = true, -- Imperial Manta Ray
+	[41801] = true, -- Moonglow Cuttlefish
+	[41806] = true, -- Musselback Sculpin
+	[41813] = true, -- Nettlefish
+	[41803] = true, -- Rockfin Grouper
+	[43571] = true, -- Sewer Carp
+	[43572] = true, -- Magic Eater
+	[43652] = true -- Slippery Eel
+}

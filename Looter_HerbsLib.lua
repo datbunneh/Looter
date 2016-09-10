@@ -1,0 +1,57 @@
+-- Looters Herb Data
+
+LooterHerbs = {
+	-- Herbs (Herbalism)
+	[22710] = true, -- Bloodthistle (Bloodelf Unique Herb)
+	[2447] = true, -- Peacebloom
+	[765] = true, -- Silverleaf
+	[2449] = true, -- Earthroot
+	[785] = true, -- Mageroyal
+	[2450] = true, -- Briarthorn
+	[2452] = true, -- Swiftthistle
+	[2453] = true, -- Bruiseweed
+	[3820] = true, -- Strangekelp
+	[3355] = true, -- Wild Steelbloom
+	[3369] = true, -- Grave Moss
+	[3356] = true, -- Kingsblood
+	[3357] = true, -- Liferoot
+	[3818] = true, -- Fadeleaf
+	[3821] = true, -- Goldthorn
+	[3358] = true, -- Khadgar's Whisker
+	[3819] = true, -- Wintersbite
+	[8153] = true, -- Wildvine
+	[4625] = true, -- Firebloom
+	[8831] = true, -- Purple Lotus
+	[8836] = true, -- Arthas's Tear
+	[8838] = true, -- Sungrass
+	[8839] = true, -- Blindweed
+	[8845] = true, -- Ghost Mushroom
+	[8846] = true, -- Gromsblood
+	[13464] = true, -- Golden Sansam
+	[13463] = true, -- Dreamfoil
+	[13465] = true, -- Mountain Silversage
+	[13466] = true, -- Plaguebloom
+	[13467] = true, -- Icecap
+	[13468] = true, -- Black Lotus
+	[19726] = true, -- Bloodvine
+	[22786] = true, -- Dreaming Glory
+	[22785] = true, -- Felweed
+	[22789] = true, -- Terocone
+	[22787] = true, -- Ragveil
+	[22788] = true, -- Flame Cap
+	[22790] = true, -- Ancient Lichen
+	[22791] = true, -- Netherbloom
+	[22797] = true, -- Nightmare Seed
+	[22794] = true, -- Fel Lotus
+	[22793] = true, -- Mana Thistle
+	[22792] = true, -- Nightmare Vine
+	[37921] = true, -- Dreadnettle
+	[36901] = true, -- Goldclover
+	[36907] = true, -- Telandra's Rose
+	[36904] = true, -- Tiger Lilly
+	[36902] = true, -- Constrictor Grass
+	[36903] = true, -- Adder's Tongue
+	[36906] = true, -- Icethorn
+	[36905] = true, -- Lichbloom
+	[36908] = true -- Frost Lotus
+}

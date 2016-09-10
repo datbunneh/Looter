@@ -1,0 +1,26 @@
+## Interface: 30300
+## Title: Looter
+## Notes: Autoloot Various Items
+## Author: EVmaker and sjones321
+## Dependencies: EMLib
+## SavedVariablesPerCharacter: Looter_Settings, LooterUserInput, LooterUserValue, LooterBlockList, LooterMiniMap_Settings
+## X-Embeds: CallBackHandler, LibStub, LibDataBroker
+Libs\LibStub.lua
+Libs\CallbackHandler-1.0.lua
+Libs\LibDataBroker-1.1.lua
+LooterLDB.xml
+Looter.xml
+LooterMiniMap.xml
+
+Looter_ClothLib.lua
+Looter_LeatherLib.lua
+Looter_MiningLib.lua
+Looter_HerbsLib.lua
+Looter_ProspectingLib.lua
+Looter_EnchantingLib.lua
+Looter_FishLib.lua
+Looter_HealthLib.lua
+Looter_ManaLib.lua
+Looter_BattlegroundLib.lua
+Looter_MillingLib.lua
+Looter_GeneralProfessionLib.lua
