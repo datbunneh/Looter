@@ -193,14 +193,22 @@ function Looter_SlashHandler(theMsg)
 		if (theChoice == "" or theChoice == " " or theChoice == nil) then
 			local itemArray = EML_toolInfo(nil,LTR_EML)
 			if (itemArray) then
-				EML_addTable(itemArray.Name,LooterBlockList)
-				EMLChat("Adding "..itemArray.Name.." to the block list.","chat",LTR_EML)
+        if (Looter_IsInList(itemArray.Name, LooterUserInput)) then
+          EMLChat(itemArray.Name.." is already in list.","chat",LTR_EML)
+        else
+          EML_addTable(itemArray.Name,LooterBlockList)
+          EMLChat("Adding "..itemArray.Name.." to the block list.","chat",LTR_EML)
+        end
 			else
 				EMLChat("Not moused over an item in your bags or bank.","chat",LTR_EML)
 			end
 		else
-			EML_addTable(theChoice,LooterBlockList)
-			EMLChat("Adding "..theChoice.." to the block list.","chat",LTR_EML)
+      if (Looter_IsInList(itemArray.Name, LooterBlockList)) then
+        EMLChat(itemArray.Name.." is already in block list.","chat",LTR_EML)
+      else
+        EML_addTable(theChoice,LooterBlockList)
+        EMLChat("Adding "..theChoice.." to the block list.","chat",LTR_EML)
+      end
 		end
 	elseif strmatch(msg, "unblock") then
 		local theChoice = strmatch(theMsg, "unblock (.*)");
@@ -281,8 +289,12 @@ function Looter_SlashHandler(theMsg)
 	elseif msg == "add" then
 		local itemArray = EML_toolInfo(nil,LTR_EML)
 		if (itemArray) then
-			EML_addTable(itemArray.Name,LooterUserInput)
-			EMLChat("Adding "..itemArray.Name.." to the list.","chat",LTR_EML)
+      if (Looter_IsInList(itemArray.Name, LooterUserInput)) then
+        EMLChat(itemArray.Name.." is already in list.","chat",LTR_EML)
+      else
+        EML_addTable(itemArray.Name,LooterUserInput)
+        EMLChat("Adding "..itemArray.Name.." to the list.","chat",LTR_EML)
+      end
 		else
 			EMLChat("Not moused over an item in your bags or bank.","chat",LTR_EML)
 		end
@@ -591,10 +603,26 @@ end
 function Looter_Add(arg1)
 	local userInput=Looter1_InputBox:GetText()
 	if Looter1_InputBox:GetText() then
-		table.insert(LooterUserInput,userInput)
-		EMLChat("Adding "..userInput.." to the list.","chat",LTR_EML)
-		Looter1_InputBox:SetText("")
+    if (Looter_IsInList(userInput, LooterUserInput)) then
+      EMLChat(userInput.." is already in list.","chat",LTR_EML)
+    else
+      table.insert(LooterUserInput,userInput)
+      EMLChat("Adding "..userInput.." to the list.","chat",LTR_EML)
+    end
+    
+    Looter1_InputBox:SetText("")
 	end
+end
+
+-- Check if item is already in list
+function Looter_IsInList(needle, haystack)
+  for index,value in pairs(haystack) do
+		if value == tostring(needle) then
+			return true
+		end
+	end
+  
+  return false
 end
 
 -- Remove user input
