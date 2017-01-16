@@ -188,42 +188,54 @@ function Looter_SlashHandler(theMsg)
 		EML_Display(LooterUserInput,LTR_EML)
 	elseif (msg == "list block" or msg == "list blocked") then
 		EML_Display(LooterBlockList,LTR_EML)
-	elseif strmatch(msg, "block") then
-		local theChoice = strmatch(theMsg, "block (.*)");
-		if (theChoice == "" or theChoice == " " or theChoice == nil) then
-			local itemArray = EML_toolInfo(nil,LTR_EML)
-			if (itemArray) then
-        if (Looter_IsInList(itemArray.Name, LooterUserInput)) then
-          EMLChat(itemArray.Name.." is already in list.","chat",LTR_EML)
-        else
-          EML_addTable(itemArray.Name,LooterBlockList)
-          EMLChat("Adding "..itemArray.Name.." to the block list.","chat",LTR_EML)
-        end
-			else
-				EMLChat("Not moused over an item in your bags or bank.","chat",LTR_EML)
-			end
-		else
-      if (Looter_IsInList(itemArray.Name, LooterBlockList)) then
-        EMLChat(itemArray.Name.." is already in block list.","chat",LTR_EML)
-      else
-        EML_addTable(theChoice,LooterBlockList)
-        EMLChat("Adding "..theChoice.." to the block list.","chat",LTR_EML)
-      end
-		end
 	elseif strmatch(msg, "unblock") then
-		local theChoice = strmatch(theMsg, "unblock (.*)");
+		local theChoice = strmatch(theMsg, "unblock (.*)")
+		
 		if (theChoice == "" or theChoice == " " or theChoice == nil) then
-			local itemArray = EML_toolInfo(nil,LTR_EML)
+			local itemArray = EML_toolInfo(nil, LTR_EML)
+			
 			if (itemArray) then
-				EML_remTable(itemArray.Name,LooterBlockList)
-				EML_remTable(tostring(itemArray.ID),LooterBlockList)
-				EMLChat("Removing "..itemArray.Name.." from the block list.","chat",LTR_EML)
+				if (not Looter_IsInList(itemArray.Name, LooterBlockList)) then
+					EMLChat(itemArray.Name .. " is not in the block list.", "chat", LTR_EML)
+				else
+					EML_remTable(itemArray.Name, LooterBlockList)
+					EML_remTable(tostring(itemArray.ID), LooterBlockList)
+					EMLChat("Removing " .. itemArray.Name .. " from the block list.", "chat", LTR_EML)
+				end
 			else
-				EMLChat("Not moused over an item in your bags or bank.","chat",LTR_EML)
+				EMLChat("Not moused over an item in your bags or bank.", "chat", LTR_EML)
 			end
 		else
-			EML_remTable(theChoice,LooterBlockList)
-			EMLChat("Removing "..theChoice.." from the block list.","chat",LTR_EML)
+			if (not Looter_IsInList(theChoice, LooterBlockList)) then
+				EMLChat(theChoice .. " is not in the block list.", "chat", LTR_EML)
+			else
+				EML_remTable(theChoice, LooterBlockList)
+				EMLChat("Removing " .. theChoice .. " from the block list.", "chat", LTR_EML)
+			end
+		end
+	elseif strmatch(msg, "block") then
+		local theChoice = strmatch(theMsg, "block (.*)")
+		
+		if (theChoice == "" or theChoice == " " or theChoice == nil) then
+			local itemArray = EML_toolInfo(nil, LTR_EML)
+			
+			if (itemArray) then
+				if (Looter_IsInList(itemArray.Name, LooterBlockList)) then
+					EMLChat(itemArray.Name .. " is already in the block list.", "chat", LTR_EML)
+				else
+					EML_addTable(itemArray.Name, LooterBlockList)
+					EMLChat("Adding " .. itemArray.Name .. " to the block list.", "chat", LTR_EML)
+				end
+			else
+				EMLChat("Not moused over an item in your bags or bank.", "chat", LTR_EML)
+			end
+		else
+			if (Looter_IsInList(theChoice, LooterBlockList)) then
+				EMLChat(theChoice .. " is already in the block list.", "chat", LTR_EML)
+			else
+				EML_addTable(theChoice, LooterBlockList)
+				EMLChat("Adding " .. theChoice .. " to the block list.", "chat", LTR_EML)
+			end
 		end
 	elseif strmatch(msg, "rarity") then
 		theChoice = strmatch(msg, "rarity (.*)");
@@ -287,25 +299,31 @@ function Looter_SlashHandler(theMsg)
 	elseif msg == "sjones321" then
 		EMLChat("SJones321 codes the XML (GUI) part of the mod.","chat",LTR_EML)
 	elseif msg == "add" then
-		local itemArray = EML_toolInfo(nil,LTR_EML)
+		local itemArray = EML_toolInfo(nil, LTR_EML)
+		
 		if (itemArray) then
-      if (Looter_IsInList(itemArray.Name, LooterUserInput)) then
-        EMLChat(itemArray.Name.." is already in list.","chat",LTR_EML)
-      else
-        EML_addTable(itemArray.Name,LooterUserInput)
-        EMLChat("Adding "..itemArray.Name.." to the list.","chat",LTR_EML)
-      end
+			if (Looter_IsInList(itemArray.Name, LooterUserInput)) then
+				EMLChat(itemArray.Name.. " is already in the list.", "chat", LTR_EML)
+			else
+				EML_addTable(itemArray.Name, LooterUserInput)
+				EMLChat("Adding " .. itemArray.Name .. " to the list.", "chat", LTR_EML)
+			end
 		else
-			EMLChat("Not moused over an item in your bags or bank.","chat",LTR_EML)
+			EMLChat("Not moused over an item in your bags or bank.", "chat", LTR_EML)
 		end
 	elseif msg == "remove" then
-		local itemArray = EML_toolInfo(nil,LTR_EML)
+		local itemArray = EML_toolInfo(nil, LTR_EML)
+		
 		if (itemArray) then
-			EML_remTable(itemArray.Name,LooterUserInput)
-			EML_remTable(tostring(itemArray.ID),LooterUserInput)
-			EMLChat("Removing "..itemArray.Name.." from the list.","chat",LTR_EML)
+			if (not Looter_IsInList(itemArray.Name, LooterUserInput)) then
+				EMLChat(itemArray.Name .. " is not in the list.", "chat", LTR_EML)
+			else
+				EML_remTable(itemArray.Name, LooterUserInput)
+				EML_remTable(tostring(itemArray.ID), LooterUserInput)
+				EMLChat("Removing " .. itemArray.Name .. " from the list.", "chat", LTR_EML)
+			end
 		else
-			EMLChat("Not moused over an item in your bags or bank.","chat",LTR_EML)
+			EMLChat("Not moused over an item in your bags or bank.", "chat", LTR_EML)
 		end
 	elseif strmatch(msg, "toggle") then
 		local theToggle = strmatch(msg, "toggle (.*)");
