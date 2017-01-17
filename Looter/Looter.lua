@@ -222,6 +222,8 @@ function Looter_SlashHandler(theMsg)
 			if (itemArray) then
 				if (Looter_IsInList(itemArray.Name, LooterBlockList)) then
 					EMLChat(itemArray.Name .. " is already in the block list.", "chat", LTR_EML)
+				elseif (Looter_IsInList(itemArray.Name, LooterUserInput)) then
+					EMLChat(itemArray.Name .. " is in the custom list. Item cannot be in both lists at the same time.", "chat", LTR_EML)
 				else
 					EML_addTable(itemArray.Name, LooterBlockList)
 					EMLChat("Adding " .. itemArray.Name .. " to the block list.", "chat", LTR_EML)
@@ -303,10 +305,12 @@ function Looter_SlashHandler(theMsg)
 		
 		if (itemArray) then
 			if (Looter_IsInList(itemArray.Name, LooterUserInput)) then
-				EMLChat(itemArray.Name.. " is already in the list.", "chat", LTR_EML)
+				EMLChat(itemArray.Name .. " is already in the custom list.", "chat", LTR_EML)
+			elseif (Looter_IsInList(itemArray.Name, LooterBlockList)) then
+				EMLChat(itemArray.Name .. " is in the block list. Item cannot be in both lists at the same time.", "chat", LTR_EML)
 			else
 				EML_addTable(itemArray.Name, LooterUserInput)
-				EMLChat("Adding " .. itemArray.Name .. " to the list.", "chat", LTR_EML)
+				EMLChat("Adding " .. itemArray.Name .. " to the custom list.", "chat", LTR_EML)
 			end
 		else
 			EMLChat("Not moused over an item in your bags or bank.", "chat", LTR_EML)
@@ -316,11 +320,11 @@ function Looter_SlashHandler(theMsg)
 		
 		if (itemArray) then
 			if (not Looter_IsInList(itemArray.Name, LooterUserInput)) then
-				EMLChat(itemArray.Name .. " is not in the list.", "chat", LTR_EML)
+				EMLChat(itemArray.Name .. " is not in the custom list.", "chat", LTR_EML)
 			else
 				EML_remTable(itemArray.Name, LooterUserInput)
 				EML_remTable(tostring(itemArray.ID), LooterUserInput)
-				EMLChat("Removing " .. itemArray.Name .. " from the list.", "chat", LTR_EML)
+				EMLChat("Removing " .. itemArray.Name .. " from the custom list.", "chat", LTR_EML)
 			end
 		else
 			EMLChat("Not moused over an item in your bags or bank.", "chat", LTR_EML)
